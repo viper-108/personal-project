@@ -1,3 +1,52 @@
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const celebration = document.getElementById("celebration");
+
+let yesScale = 1;
+
+// Make NO button run away
+noBtn.addEventListener("mouseover", () => {
+  const container = document.querySelector(".container");
+
+  const maxX = container.offsetWidth - noBtn.offsetWidth;
+  const maxY = 100;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+
+  // Make YES button bigger
+  yesScale += 0.15;
+  yesBtn.style.transform = `scale(${yesScale})`;
+});
+
+// When YES is clicked
+yesBtn.addEventListener("click", () => {
+  celebration.classList.remove("hidden");
+  launchHearts();
+});
+
+// Floating hearts when YES clicked
+function launchHearts() {
+  for (let i = 0; i < 40; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }
+}
+
+// Email sender
 function sendEmail() {
   const email = document.getElementById("emailInput").value;
 
@@ -10,5 +59,6 @@ function sendEmail() {
     })
   })
   .then(res => res.json())
-  .then(data => alert("Link sent successfully 💖"));
+  .then(data => alert("Proposal sent to Priya 💌"))
+  .catch(err => alert("Error sending email"));
 }
