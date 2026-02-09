@@ -1,3 +1,8 @@
+// Show admin section only if ?admin=true is in URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("admin") === "true") {
+  document.getElementById("adminSection").classList.remove("hidden");
+}
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const celebration = document.getElementById("celebration");
